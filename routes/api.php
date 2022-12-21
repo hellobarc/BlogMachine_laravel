@@ -125,7 +125,7 @@ Route::group(['middleware' => 'auth', 'prefix'=> 'user'], function ($routes) {
     //comment route
     Route::post('comment/store', [CommentController::class, 'store']);
     Route::get('comment/show/{id}', [CommentController::class, 'show']);
-    
+
     //rating route
     Route::post('rating/store', [RatingController::class, 'store']);
     Route::get('rating/show/{id}', [RatingController::class, 'show']);
@@ -134,10 +134,10 @@ Route::group(['middleware' => 'auth', 'prefix'=> 'user'], function ($routes) {
 Route::group(['middleware' => 'api'], function ($routes) {
     //hit counter route
     Route::post('hit-counter/store', [HitCounterController::class, 'store']);
-    
+
     //article routes
     Route::get('article', [ArticleController::class, 'index']);
-    Route::get('article/featured-post', [ArticleFrontController::class, 'getFeaturedPost']);
+    Route::get('article/featured-post', [ArticleFrontController::class, 'getFeaturedPost'])->name('featured_post');
     Route::get('article/latest-post', [ArticleFrontController::class, 'getLatestPost']);
     Route::get('article/post-details/{id}', [ArticleFrontController::class, 'getDetailsPost']);
     Route::get('article/related-post/{id}', [ArticleFrontController::class, 'getRelatedPost']);

@@ -23,12 +23,12 @@ class ArticleFrontController extends Controller
 {
     private ArticleRepositoryInterface $articleRepository;
 
-    public function __construct(ArticleRepositoryInterface $articleRepository) 
+    public function __construct(ArticleRepositoryInterface $articleRepository)
     {
         $this->articleRepository = $articleRepository;
     }
 
-    public function getFeaturedPost(): JsonResponse 
+    public function getFeaturedPost(): JsonResponse
     {
         $getData = $this->articleRepository->getFeaturedPost();
         $allData = ArticleResource::collection($getData);
@@ -36,40 +36,40 @@ class ArticleFrontController extends Controller
             'data' => $allData,
         ]);
     }
-    public function getLatestPost(): JsonResponse 
+    public function getLatestPost(): JsonResponse
     {
         return response()->json([
             'data' => $this->articleRepository->getLatestPost(),
         ]);
     }
 
-    public function getDetailsPost(Request $request): JsonResponse 
+    public function getDetailsPost(Request $request): JsonResponse
     {
         $articleId = $request->route('id');
         return response()->json([
             'data' => $this->articleRepository->detailsPost($articleId)
         ]);
     }
-    public function getRelatedPost(Request $request): JsonResponse 
+    public function getRelatedPost(Request $request): JsonResponse
     {
         $articleId = $request->route('id');
         return response()->json([
             'data' => $this->articleRepository->relatedPost($articleId)
         ]);
     }
-    public function getPremiumPost(): JsonResponse 
+    public function getPremiumPost(): JsonResponse
     {
         return response()->json([
             'data' => $this->articleRepository->premiumPost(),
         ]);
     }
-    public function getPopularPost(): JsonResponse 
+    public function getPopularPost(): JsonResponse
     {
         return response()->json([
             'data' => $this->articleRepository->popularPost(),
         ]);
     }
-    public function getSearchPost(Request $request): JsonResponse 
+    public function getSearchPost(Request $request): JsonResponse
     {
         $searchDetails = $request->only([
             'search',
@@ -78,7 +78,7 @@ class ArticleFrontController extends Controller
             'data' => $this->articleRepository->searchPost($searchDetails),
         ]);
     }
-    public function categoryWiseArticle(Request $request): JsonResponse 
+    public function categoryWiseArticle(Request $request): JsonResponse
     {
         $categoryId = $request->route('category_id');
         return response()->json([

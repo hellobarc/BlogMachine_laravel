@@ -20,6 +20,7 @@ class ArticleResource extends JsonResource
             'category_id' => $this->category_id,
             'page_title' => $this->page_title,
             'thumbnail' =>$this->thumbnail,
+            'created_date' =>$this->created_at,
             'slug' =>$this->slug,
             'cat_name' =>$this->category->cat_name,
         ];

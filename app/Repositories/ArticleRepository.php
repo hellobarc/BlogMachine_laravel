@@ -7,68 +7,72 @@ use App\Models\Article;
 use App\Models\HitCounter;
 use Carbon\Carbon;
 
-class ArticleRepository implements ArticleRepositoryInterface 
+class ArticleRepository implements ArticleRepositoryInterface
 {
-    public function getAll() 
+    public function getAll()
     {
         return Article::all();
     }
 
-    public function getById($Id) 
+    public function getPaginate($per_page)
+    {
+        return Article::paginate(($per_page==null?10:$per_page));
+    }
+
+    public function getById($Id)
     {
         return Article::findOrFail($Id);
     }
 
-    public function delete($Id) 
+    public function delete($Id)
     {
         Article::destroy($Id);
     }
 
-    public function create(array $Details) 
+    public function create(array $Details)
     {
-        
+
         return Article::create($Details);
     }
-    
-    public function update($Id, array $newDetails) 
+
+    public function update($Id, array $newDetails)
     {
         return Article::whereId($Id)->update($newDetails);
     }
 
-    public function getFeaturedPost() 
+    public function getFeaturedPost()
     {
-        
         return Article::where('is_featured', '=' , '1')->with('category')->get();
     }
-    public function getLatestPost() 
+
+    public function getLatestPost()
     {
-        
         return Article::latest()->with('category')->get();
     }
 
-    public function detailsPost($Id) 
+    public function detailsPost($Id)
     {
         return Article::where('id', $Id)->with('category', 'articleContent', 'articleTextContent', 'articleImageContent', 'articleVideoContent')->get();
     }
-    public function relatedPost($Id) 
+    public function relatedPost($Id)
     {
         $article = Article::where('id', $Id)->first();
         $cat_id = $article->category_id;
         $related_article = Article::where('category_id', $cat_id)->whereNotIn('id',array($Id))->get();
         return $related_article;
     }
-    public function premiumPost() 
+    public function premiumPost()
     {
         return Article::where('is_premium', '=', '1')->get();
     }
-    public function popularPost() 
+    public function popularPost()
     {
         $date = Carbon::today()->subDays(30);
         $article_id = HitCounter::where('created_at','>=',$date)->select('article_id')->take(2)->get();
         $fetch_article = Article::whereIn('id', $article_id)->get();
         return $fetch_article;
     }
-    public function searchPost($search) 
+    public function searchPost($search)
     {
         $converstion = implode(" ", $search);
         return Article::where('title', 'LIKE', "%{$converstion}%")
@@ -77,11 +81,11 @@ class ArticleRepository implements ArticleRepositoryInterface
         ->orWhere('tags', 'LIKE', "%{$converstion}%")
         ->get();
     }
-    public function categoryArticle($category_id) 
+    public function categoryArticle($category_id)
     {
         return Article::where('category_id', $category_id)->get();
     }
-    // public function getFulfilledOrders() 
+    // public function getFulfilledOrders()
     // {
     //     return Order::where('is_fulfilled', true);
     // }

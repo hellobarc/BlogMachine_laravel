@@ -20,12 +20,12 @@ class ImageContentController extends Controller
 {
     private ImageContentRepositoryInterface $imageContentRepository;
 
-    public function __construct(ImageContentRepositoryInterface $imageContentRepository) 
+    public function __construct(ImageContentRepositoryInterface $imageContentRepository)
     {
         $this->imageContentRepository = $imageContentRepository;
     }
 
-    public function index(): JsonResponse 
+    public function index(): JsonResponse
     {
         $getData = $this->imageContentRepository->getAll();
         $allData = CategoryResource::collection($getData);
@@ -34,13 +34,13 @@ class ImageContentController extends Controller
         ]);
     }
 
-    public function store(SaveImageContentRequest $request): JsonResponse 
+    public function store(SaveImageContentRequest $request): JsonResponse
     {
         $image = $request->file('content');
         $img = time().'.'.$image->getClientOriginalExtension();
         $featured_path = 'uploads/article_content/image_content/' .$img;
         $location = public_path($featured_path);
-       
+
         $imgFile = Image::make($image)->save($location);
 
         $imageContentDetails = $request->only([
@@ -58,17 +58,17 @@ class ImageContentController extends Controller
         );
     }
 
-    public function show(Request $request): JsonResponse 
+    public function show(Request $request): JsonResponse
     {
         $imageContectId = $request->route('id');
 
-        
+
         return response()->json([
             'data' => $this->imageContentRepository->getById($imageContectId)
         ]);
     }
 
-    public function update(Request $request): JsonResponse 
+    public function update(Request $request): JsonResponse
     {
         $imageContectId = $request->route('id');
 
@@ -85,10 +85,10 @@ class ImageContentController extends Controller
         $imgFile = Image::make($image)->save($location);
 
 
-        $imgFile->resize(150, 150, function ($constraint) {
+        $imgFile->resize(296, 222, function ($constraint) {
 		    $constraint->aspectRatio();
 		})->save($thumbnail);
-        
+
         $textContentDetails = $request->only([
             'article_id',
             'article_content_id',
@@ -102,7 +102,7 @@ class ImageContentController extends Controller
         ]);
     }
 
-    public function destroy(Request $request): JsonResponse 
+    public function destroy(Request $request): JsonResponse
     {
         $imageContectId = $request->route('id');
 
@@ -114,7 +114,7 @@ class ImageContentController extends Controller
                 File::delete('uploads/article_content/thumbnail/'.$find_id->content);
             }
         }
-       
+
         $this->imageContentRepository->delete($imageContectId);
 
 
@@ -123,7 +123,7 @@ class ImageContentController extends Controller
             'status' => "success deleted",
         ]);
     }
-    public function imageContentByArticleContentId(Request $request): JsonResponse 
+    public function imageContentByArticleContentId(Request $request): JsonResponse
     {
         $articleId = $request->route('id');
 

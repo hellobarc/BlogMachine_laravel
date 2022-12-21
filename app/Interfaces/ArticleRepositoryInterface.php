@@ -2,9 +2,10 @@
 
 namespace App\Interfaces;
 
-interface ArticleRepositoryInterface 
+interface ArticleRepositoryInterface
 {
     public function getAll();
+    public function getPaginate($per_page);
     public function getById($Id);
     public function delete($Id);
     public function create(array $Details);
