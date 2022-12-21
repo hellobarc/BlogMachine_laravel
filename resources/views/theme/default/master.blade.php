@@ -50,8 +50,8 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-lg-2">
                             <div class="logo-area">
-                                <a href="index.html" class="temp-logo" id="temp-logo">
-                                    <img src="theme/default/img/logo-light.png" alt="logo" class="img-fluid">
+                                <a href="{{route('homepage')}}" class="temp-logo" id="temp-logo" >
+                                    <img src="theme/default/img/logo-light.png" alt="logo" class="img-fluid" width="50px">
                                 </a>
                             </div>
                         </div>

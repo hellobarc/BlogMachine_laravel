@@ -9,7 +9,7 @@
             data-r-large-dots="false" data-r-extra-large="4" data-r-extra-large-nav="true"
             data-r-extra-large-dots="false">
             @empty(!$featured_post)
-                   @foreach($featured_post as $post)
+                   @foreach($featured_post->take(7) as $post)
                    <div class="slider-box-layout8">
                         <div class="item-img">
                             <img src="uploads/article/thumbnail/{{$post->thumbnail}}" alt="{{$post->title}}">
