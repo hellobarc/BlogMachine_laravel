@@ -183,10 +183,11 @@ return [
         App\Providers\RepositoryServiceProvider::class,
 
         //for image resize
-        'Intervention\Image\ImageServiceProvider'
+        'Intervention\Image\ImageServiceProvider',
+        App\Providers\ContentServiceProvider::class // created by tarique
 
 
-        
+
 
     ],
 

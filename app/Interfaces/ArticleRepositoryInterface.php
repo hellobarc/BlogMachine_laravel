@@ -10,7 +10,7 @@ interface ArticleRepositoryInterface
     public function delete($Id);
     public function create(array $Details);
     public function update($Id, array $newDetails);
-    public function getFeaturedPost();
+    public function getFeaturedPost($category_id=null);
     public function getLatestPost();
     public function detailsPost($Id);
     public function relatedPost($Id);

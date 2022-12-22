@@ -20,12 +20,12 @@ class CategoryController extends Controller
 {
     private CategoryRepositoryInterface $categoryRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository) 
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function index(): JsonResponse 
+    public function index(): JsonResponse
     {
         $getData = $this->categoryRepository->getAll();
         $allData = CategoryResource::collection($getData);
@@ -34,7 +34,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(SaveCategoryRequest $request): JsonResponse 
+    public function store(SaveCategoryRequest $request): JsonResponse
     {
         $image = $request->file('featured_image');
         $img = time().'.'.$image->getClientOriginalExtension();
@@ -69,7 +69,7 @@ class CategoryController extends Controller
         );
     }
 
-    public function show(Request $request): JsonResponse 
+    public function show(Request $request): JsonResponse
     {
         $catId = $request->route('id');
 
@@ -78,7 +78,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update(Request $request): JsonResponse 
+    public function update(Request $request): JsonResponse
     {
         $catId = $request->route('id');
         $find_id = Category::where('id', $catId)->first();
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function destroy(Request $request): JsonResponse 
+    public function destroy(Request $request): JsonResponse
     {
         $catId = $request->route('id');
         $find_id = Category::where('id', $catId)->first();

@@ -1,7 +1,8 @@
 <nav id="dropdown" class="template-main-menu">
     <ul>
         <li class="hide-on-mobile-menu">
-            <a href="#">HOME</a>
+            <a href="{{route('homepage')}}">HOME</a>
+            <!--
             <ul class="dropdown-menu-col-2">
                 <li>
                     <a href="index.html">Home 1</a>
@@ -22,9 +23,11 @@
                     <a href="coming-soon.html">Coming Soon</a>
                 </li>
             </ul>
+        -->
         </li>
         <li class="hide-on-desktop-menu">
             <a href="#">HOME</a>
+        <!--
             <ul class="dropdown-menu-col-2">
                 <li><a href="index.html">Home 1</a></li>
                 <li><a href="index2.html">Home 2</a></li>
@@ -40,6 +43,7 @@
                 <li><a href="index12.html">Home 12</a></li>
                 <li><a href="index13.html">Home 13</a></li>
             </ul>
+        -->
         </li>
         <li>
             <a href="about.html">ABOUT</a>
@@ -47,20 +51,14 @@
         <li>
             <a href="#">CATEGORIES</a>
             <ul class="dropdown-menu-col-1">
-                <li>
-                    <a href="blog-category1.html">Blog Category 1</a>
-                </li>
-                <li>
-                    <a href="blog-category2.html">Blog Category 2</a>
-                </li>
-                <li>
-                    <a href="blog-category3.html">Blog Category 3</a>
-                </li>
-                <li>
-                    <a href="blog-category4.html">Blog Category 4</a>
-                </li>
+                @foreach ($contents as $content)
+                    <li>
+                        <a href="{{route('categorypage',$content->id)}}">{{$content->cat_name}}</a>
+                    </li>
+                @endforeach
             </ul>
         </li>
+        <!--
         <li>
             <a href="#">BLOG</a>
             <ul class="dropdown-menu-col-1">
@@ -75,6 +73,8 @@
                 </li>
             </ul>
         </li>
+    -->
+    <!--
         <li class="possition-static hide-on-mobile-menu">
             <a href="#">PAGES</a>
             <div class="template-mega-menu">
@@ -181,6 +181,7 @@
                 </div>
             </div>
         </li>
+    -->
         <li class="hide-on-desktop-menu">
             <a href="#">Pages</a>
             <ul>
@@ -207,5 +208,15 @@
         <li>
             <a href="contact.html">CONTACT</a>
         </li>
+
+        <li>
+            <a href="contact.html" ><span class="brn btn-primary p-3">LOGIN</span></a>
+        </li>
     </ul>
 </nav>
+
+@push('custom-scripts')
+    <script>
+      //  alert("love");
+    </script>
+@endpush

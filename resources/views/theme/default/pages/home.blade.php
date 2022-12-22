@@ -29,27 +29,24 @@
 @endif
 @endsection
 
-@section('slider')
-    @include('theme/default/partials/slider')
-@endsection
 @section('content')
-<div class="container">
-    <div class="row gutters-40 pb-3"> <!--Premium Post-->
-        @include('theme/default/partials/premium')
-    </div>
-    <div class="row gutters-50">
-        <div class="col-lg-8">
-            <div class="row">
-              @include('theme/default/partials/latest')
+    @include('theme/default/partials/slider')
+    <section class="blog-wrap-layout19">
+        <div class="container">
+            <div class="row gutters-40 pb-3"> <!--Premium Post-->
+                @include('theme/default/partials/premium')
             </div>
-             @include('theme/default/partials/paginate_post')
+            <div class="row gutters-50">
+                <div class="col-lg-8">
+                    <div class="row">
+                    @include('theme/default/partials/latest')
+                    </div>
+                    @include('theme/default/partials/paginate_post')
+                </div>
+                <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
+                    @include('theme/default/partials/home_sidebar')
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-
-            @include('theme/default/partials/home_sidebar')
-
-        </div>
-    </div>
-</div>
+    </section>
 @endsection

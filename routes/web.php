@@ -13,9 +13,12 @@ use App\Http\Controllers\Front\HomepageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [HomepageController::class,'homepage'])->name('homepage');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::controller(HomepageController::class)
+    ->group(function () {
+        Route::get('/', 'homepage')->name('homepage');
+        Route::get('/category/{id}', 'category')->name('categorypage');
+    });

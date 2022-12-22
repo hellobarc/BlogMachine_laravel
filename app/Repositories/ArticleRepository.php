@@ -40,9 +40,17 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::whereId($Id)->update($newDetails);
     }
 
-    public function getFeaturedPost()
+    public function getFeaturedPost($category_id = null)
     {
-        return Article::where('is_featured', '=' , '1')->with('category')->get();
+        $query = Article::query();
+
+        if($category_id != null){
+            $query->where('is_featured','1')->where('category_id',  $category_id)->with('category');
+        }else{
+            $query->where('is_featured','1')->with('category');
+        }
+
+        return $query->get();
     }
 
     public function getLatestPost()

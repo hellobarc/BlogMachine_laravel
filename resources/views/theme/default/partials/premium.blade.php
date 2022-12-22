@@ -3,7 +3,7 @@
     <div class="col-lg-6 col-12">
         <div class="blog-box-layout16">
             <div class="item-img">
-                <img src="uploads/article/thumbnail/{{$post->thumbnail}}" alt="slider">
+                <img src="{{asset('uploads/article/thumbnail')}}/{{$post->thumbnail}}" alt="slider">
                 <div class="item-content">
                     <ul class="entry-meta meta-color-light">
                         <li><i class="fas fa-tag"></i>Share Market</li>
