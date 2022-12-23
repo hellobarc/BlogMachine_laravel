@@ -29,8 +29,9 @@ class ContentServiceProvider extends ServiceProvider
     {
         $this->menuItems = ["Home", "About Us", "Contact"];
         $this->category =  Category::all();
+        $this->theme_name = env('SITE_THEME');
 
-        view()->composer('theme.default.master', function($view) {
+        view()->composer('theme.'.$this->theme_name.'.master', function($view) {
             $view->with(['contents' =>  $this->category]);
         });
     }

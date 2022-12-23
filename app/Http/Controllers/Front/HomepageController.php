@@ -19,6 +19,7 @@ class HomepageController extends Controller
     public function __construct(ArticleRepositoryInterface $articleRepository)
     {
         $this->articleRepository = $articleRepository;
+        $this->theme_name = env('SITE_THEME');
     }
 
     public function homepage(){
@@ -32,7 +33,7 @@ class HomepageController extends Controller
         $popular_post = $this->articleRepository->popularPost();
         $latest_post = $this->articleRepository->getLatestPost();
         $paginate_post = $this->articleRepository->getPaginate(3);
-        return view('theme.default.pages.home')->with(['meta'=>$meta,'featured_post'=>$featured_post,'premium_post'=>$premium_post,'popular_post'=>$popular_post,'latest_post'=>$latest_post,'paginate_post'=>$paginate_post] );
+        return view('theme.'.$this->theme_name.'.pages.home')->with(['meta'=>$meta,'featured_post'=>$featured_post,'premium_post'=>$premium_post,'popular_post'=>$popular_post,'latest_post'=>$latest_post,'paginate_post'=>$paginate_post] );
     }
 
 
@@ -59,7 +60,7 @@ class HomepageController extends Controller
 
 
     //  dd(  $featured_post);
-        return view('theme.default.pages.category')->with(['meta'=>$meta,'category'=>$category,'featured_post'=>$featured_post,'premium_post'=>$premium_post,'popular_post'=>$popular_post,'latest_post'=>$latest_post,'paginate_post'=>$paginate_post] );
+        return view('theme.'.$this->theme_name.'.pages.category')->with(['meta'=>$meta,'category'=>$category,'featured_post'=>$featured_post,'premium_post'=>$premium_post,'popular_post'=>$popular_post,'latest_post'=>$latest_post,'paginate_post'=>$paginate_post] );
     }
 
 

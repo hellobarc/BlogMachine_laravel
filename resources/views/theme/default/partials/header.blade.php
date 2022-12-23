@@ -6,12 +6,12 @@
                 <div class="col-lg-2">
                     <div class="logo-area">
                         <a href="{{route('homepage')}}" class="temp-logo" id="temp-logo" >
-                            <img src="{{asset('theme/default/img/logo-light.png')}}" alt="logo" class="img-fluid" width="50px">
+                            <img src="{{asset('theme/default/img/logo-light.png')}}" alt="{{env('SITE_THEME')}}" class="img-fluid" width="50px">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-8 d-flex justify-content-end">
-                    @include('theme/default/partials/navigation');
+                    @include('theme/default/partials/navigation')
                 </div>
                 <div class="col-lg-2 d-flex justify-content-end">
                     <div class="header-action-items">

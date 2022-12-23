@@ -1,5 +1,5 @@
-@extends('theme.default.master')
 
+@extends('theme.'.env('SITE_THEME').'.master')
 @section('meta_tags')
 @if($meta)
     <title>{{$meta['title']}} - {{env('SITE_URL', 'Site Name')}}</title>
