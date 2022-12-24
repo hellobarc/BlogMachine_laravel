@@ -177,7 +177,7 @@ return [
 
         //custom
         // JWT
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+     //   Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         // custom service provider
         App\Providers\RepositoryServiceProvider::class,

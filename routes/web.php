@@ -41,7 +41,7 @@ Route::controller(HomepageController::class)
     });
 
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
 });
 

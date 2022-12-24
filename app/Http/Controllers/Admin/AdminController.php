@@ -16,7 +16,8 @@ class AdminController extends Controller
 
    public function dashboard(){
 
-    //dd(session()->getSessionConfig());
-         dd(Auth::check());
+   // //dd(session()->getSessionConfig());
+         dd(Auth::user());
+
    }
 }
