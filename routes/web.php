@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\HomepageController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +16,33 @@ use App\Http\Controllers\Front\HomepageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Auth::routes();
+//Auth::routes();
+
+
+Route::get('/login', [AuthController::class, 'index'])->name('home');
+
+
+Route::controller(AuthController::class)
+    ->group(function () {
+        Route::match(array('GET','POST'),'/login', 'login')->name('login');
+        Route::get('/register', 'login')->name('home_register');
+    });
+
+
 Route::controller(HomepageController::class)
     ->group(function () {
-        Route::get('/', 'homepage')->name('homepage');
-        Route::get('/category/{id}', 'category')->name('categorypage');
+        Route::get('/', 'homepage')->name('home_page');
+        Route::get('/category/{id}/{slug}', 'category')->name('category_page')->where('id', '[0-9]+');
+        Route::get('/detail/{id}/{slug}', 'detail')->name('detail_page');
+        Route::get('/search', 'search')->name('search_page');
     });
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
+});
+
+

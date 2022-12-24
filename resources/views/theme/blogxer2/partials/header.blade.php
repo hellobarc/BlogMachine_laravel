@@ -6,20 +6,16 @@
                         <div class="col-lg-4">
                             <div class="header-action-items">
                                 <ul>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fas fa-rss"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li class="item-social-layout2"> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    @foreach ($social_setting as $social)
+                                    <li class="item-social-layout2"> <a href="{{$social->social_url}}" target="_blank"><i class="{{$social->social_icon}}"></i></a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center">
                             <div class="logo-area">
                                 <a href="index.html" class="temp-logo" id="temp-logo">
-                                    <img src="{{asset('theme/default/img/logo-light.png')}}" alt="{{env('SITE_THEME')}}" class="img-fluid" width="50px">
+                                    <img src="{{asset('uploads/site_setting')}}/{{$site_logo}}" alt="{{env('SITE_NAME')}}" class="img-fluid" width="50px">
                                 </a>
                             </div>
                         </div>

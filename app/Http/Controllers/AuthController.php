@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Image;
 use File;
 
 class AuthController extends Controller
 {
+    use AuthenticatesUsers;
     /**
      * Create a new AuthController instance.
      *
@@ -23,7 +25,7 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        
+
         $validation = Validator::make($request->all(),[
             'name' => 'required|string|min:5|max:100',
             'email' => 'required|string|email|unique:users',
@@ -38,7 +40,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => $validation->errors(),
             ];
-            
+
             return response()->json($response, 400);
         }
 
@@ -54,7 +56,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             // 'avatar' => $img,
         ]);
- 
+
         $response = [
             'success' => true,
             'data' => $users,
@@ -72,13 +74,56 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        if ($request->isMethod('post')) {
 
-        if ($token = $this->guard()->attempt($credentials)) {
-            return $this->respondWithToken($token);
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+
+           // $credentials = $request->only('email', 'password');
+
+            if (Auth::attempt($credentials)) {
+
+                if($request->route()->getPrefix() === 'api') {
+                    $token = $this->guard()->attempt($credentials);
+                    return $this->respondWithToken($token);
+                }else{
+                    // web //
+                    $request->session()->regenerate();
+                    if( Auth::user()->rolled_user->role_name == "admin"){
+                       $request->session()->regenerate();
+
+                      // dd(Auth::user());
+
+                        return redirect()->route('admin.dashboard');
+                    }
+                    // web end //
+                }
+            }else{
+                if($request->route()->getPrefix() === 'api') {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }else{
+                    //web //
+                    return back()->withInput();
+                }
+            }
+
+
+        }else{
+            if($request->route()->getPrefix() === 'api') {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }else{
+                //web //
+                if (Auth::check()) {
+                    dd(Auth::user());
+                }else{
+                    return view('auth.login');
+                }
+
+            }
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**

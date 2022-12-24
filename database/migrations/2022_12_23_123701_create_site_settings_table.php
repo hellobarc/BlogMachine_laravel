@@ -15,11 +15,12 @@ class CreateSiteSettingsTable extends Migration
     {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('logo_file');
-            $table->string('homepage_title');
-            $table->string('homepage_description');
-            $table->string('site_email');
-            $table->string('site_email');
+            $table->string('logo_file')->default('logo.png');
+            $table->string('homepage_title')->default('Home page Title');
+            $table->string('homepage_description')->default('Home page description');
+            $table->string('site_email')->default('tariq.barc@gmail.com');
+            $table->smallInteger('featured_post_count');
+            $table->smallInteger('pagination_post_count');
             $table->timestamps();
         });
     }

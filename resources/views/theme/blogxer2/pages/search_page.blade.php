@@ -39,7 +39,7 @@
                             <h1>{{$category->cat_name}}</h1>
                             <ul>
                                 <li>
-                                    <a href="{{route('home_page')}}">Home</a>
+                                    <a href="{{route('homepage')}}">Home</a>
                                 </li>
                                 <li>{{$category->cat_name}}</li>
                             </ul>

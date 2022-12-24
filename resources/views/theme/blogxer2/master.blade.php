@@ -19,7 +19,6 @@
     <script src="{{asset('theme/default/js/modernizr-3.6.0.min.js')}}"></script>
 </head>
 <body class="sticky-header">
-
     <div id="preloader"></div>
     <div id="wrapper" class="wrapper">
         @include('theme/'.env('SITE_THEME').'/partials/header')

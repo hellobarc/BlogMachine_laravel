@@ -20,4 +20,9 @@ class Category extends Model
         'thumbnail',
         'featured_image',
     ];
+
+
+    public function categorySlug(){
+        return  $this->cat_name . " eta category";
+    }
 }
