@@ -86,25 +86,25 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
 
                 if($request->route()->getPrefix() === 'api') {
-                    $token = $this->guard()->attempt($credentials);
-                    return $this->respondWithToken($token);
+                    //$token = $this->guard()->attempt($credentials);
+                    //return $this->respondWithToken($token);
+
+                        // RETURN A JSON ??
+
+
                 }else{
-                    // web //
+                    // WEB //
                     $request->session()->regenerate();
                     if( Auth::user()->rolled_user->role_name == "admin"){
-                       $request->session()->regenerate();
-
-                      // dd(Auth::user());
-
                         return redirect()->route('admin.dashboard');
                     }
-                    // web end //
+                    // WEB end //
                 }
             }else{
                 if($request->route()->getPrefix() === 'api') {
                     return response()->json(['error' => 'Unauthorized'], 401);
                 }else{
-                    //web //
+                    //WEB  //
                     return back()->withInput();
                 }
             }

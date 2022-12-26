@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
-use App\Models\ArticleContent;
-use App\Models\TextContent;
-use App\Models\ImageContent;
-use App\Models\VideoContent;
+
+use Carbon\Carbon;
+
 class Article extends Model
 {
     use HasFactory;
@@ -56,5 +54,15 @@ class Article extends Model
     {
         return $this->hasMany(VideoContent::class, 'article_id');
     }
-   
+
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    // }
+
+    // public function getUpdatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    // }
+
 }

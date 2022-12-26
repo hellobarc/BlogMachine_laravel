@@ -10,7 +10,7 @@
                         <li><i class="fas fa-calendar-alt"></i>October 19, 2019</li>
                         <li><i class="fas fa-user"></i>BY <a href="#">Mark Willy</a></li>
                     </ul>
-                    <h2 class="item-title"><a href="single-blog.html">{{$post->title}}</a></h2>
+                    <h2 class="item-title"><a href="{{route('detail_page',['id'=>$post->id,'slug'=>Str::slug($post->title,'-')])}}">{{$post->title}}</a></h2>
                     <p>Stevenson and Wolfers also find, a clear role for absolute income and a
                         more limited relative income comparison.</p>
                 </div>

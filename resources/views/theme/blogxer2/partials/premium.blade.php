@@ -11,7 +11,7 @@
 						<li><i class="fas fa-calendar-alt"></i>Jan 19, 2019</li>
 						<li><i class="far fa-clock"></i>5 Mins Read</li>
 					</ul>
-					<h3 class="item-title"><a href="single-blog.html">Weekends on Maldives (pre)</a></h3>
+                    <h2 class="item-title"><a href="{{route('detail_page',['id'=>$post->id,'slug'=>Str::slug($post->title,'-')])}}">{{$post->title}}</a></h2>
 					<p>Aliquam faucibus nisl nisl. Maecenas vestibumery
 						astero convallis dapibus dignissim. </p>
 				</div>
@@ -19,4 +19,6 @@
 		</div>
 @endforeach
 @endempty
+
+
 

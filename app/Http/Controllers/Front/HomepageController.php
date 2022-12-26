@@ -99,12 +99,21 @@ class HomepageController extends Controller
 
 
 
-    public function detail(Request $request){
-        $meta['title'] = 'Detail Page | ' .  $cat_name;
-        $meta['description'] =  $meta_description ;
-        $meta['tags'] =   explode(" ",$meta_keyword) ;
-        $meta['created_at'] = date('d-m-Y');
+    public function detail(Request $request, $id, $slug){
+
+        $detail_post  =    $this->articleRepository->detailsPost($id);
+        $related_post  =    $this->articleRepository->relatedPost($id);
+
+      //  dd( $related_post);
+
+        $meta['title'] = $detail_post[0]->title;
+        $meta['description'] =  $detail_post[0]->meta_description;
+        $meta['tags'] =   explode(" ",$detail_post[0]->tags) ;
+        $meta['created_at'] = $detail_post[0]->created_at->format("Y-m-d");
         $meta['images'] = ['https://via.placeholder.com/200x100','https://via.placeholder.com/200x100'];
+
+        return view('theme.'.$this->theme_name.'.pages.detail_page')->with(['meta'=>$meta,'detail_post'=>$detail_post,'related_post'=>$related_post] );
+
     }
 
 

@@ -62,9 +62,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         return Article::where('id', $Id)->with('category', 'articleContent', 'articleTextContent', 'articleImageContent', 'articleVideoContent')->get();
     }
+
     public function relatedPost($Id)
     {
-        $article = Article::where('id', $Id)->first();
+        $article = Article::where('id', $Id)->select('category_id')->first();
         $cat_id = $article->category_id;
         $related_article = Article::where('category_id', $cat_id)->whereNotIn('id',array($Id))->get();
         return $related_article;

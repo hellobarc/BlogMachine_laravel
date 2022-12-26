@@ -36,13 +36,17 @@ Route::controller(HomepageController::class)
     ->group(function () {
         Route::get('/', 'homepage')->name('home_page');
         Route::get('/category/{id}/{slug}', 'category')->name('category_page')->where('id', '[0-9]+');
-        Route::get('/detail/{id}/{slug}', 'detail')->name('detail_page');
+        Route::get('/detail/{id}/{slug}', 'detail')->name('detail_page')->where('id', '[0-9]+');
         Route::get('/search', 'search')->name('search_page');
     });
 
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
-});
+// Route::middleware(['auth'])->prefix('admin')->group(function () {
+//     Route::get('/dashboard', [AdminController::class,'adminDashboard'])->name('admin.dashboard');
+// });
+
+Route::get('/admin/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
 
 
