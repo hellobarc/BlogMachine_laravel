@@ -1,10 +1,10 @@
 <aside class="main-sidebar">
     <!-- sidebar-->
-    <section class="sidebar position-relative">	
+    <section class="sidebar position-relative">
 	  	<div class="multinav">
-		  <div class="multinav-scroll" style="height: 100%;">	
+		  <div class="multinav-scroll" style="height: 100%;">
 			  <!-- sidebar menu-->
-			  <ul class="sidebar-menu" data-widget="tree">	
+			  <ul class="sidebar-menu" data-widget="tree">
 				<li class="header">Dashboard</li>
 				<li class="treeview">
 				  <a href="#">
@@ -15,7 +15,7 @@
 					</span>
 				  </a>
 				  <ul class="treeview-menu">
-					<li><a href="{{route('admin.dashboard')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
+					<li><a href="{{route('admin.dashboard','dashboard')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
 				  </ul>
 				</li>
 				<li class="treeview">

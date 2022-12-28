@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function adminDashboard()
+    public function adminDashboard($any)
     {
-        return view('admin.dashboard');
+       // dd($any);
+        return view('admin.layouts.mastervue');
     }
 }

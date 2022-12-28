@@ -45,8 +45,6 @@ Route::controller(HomepageController::class)
 //     Route::get('/dashboard', [AdminController::class,'adminDashboard'])->name('admin.dashboard');
 // });
 
-Route::get('/admin/{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+Route::get('/admin/{any}', [AdminController::class,'adminDashboard'])->name('admin.dashboard')->where('any', '.*');
 
 
